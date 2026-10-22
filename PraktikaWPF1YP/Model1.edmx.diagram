@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="600ada79858440fd8eeadcb50ec4c34d" Name="Diagram1">
+        <EntityTypeShape EntityType="YP_01_Praktic_1Model.agent" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="YP_01_Praktic_1Model.dogovor" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="YP_01_Praktic_1Model.dokument" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="YP_01_Praktic_1Model.klient" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="YP_01_Praktic_1Model.platezh" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="YP_01_Praktic_1Model.programma" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="YP_01_Praktic_1Model.status_dogovora" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="YP_01_Praktic_1Model.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YP_01_Praktic_1Model.users" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="YP_01_Praktic_1Model.vid_strahovaniya" Width="1.5" PointX="1.5" PointY="14.25" IsExpanded="true" />
+        <AssociationConnector Association="YP_01_Praktic_1Model.FK__dogovor__agent_i__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="YP_01_Praktic_1Model.FK_users_agent" ManuallyRouted="false" />
+        <AssociationConnector Association="YP_01_Praktic_1Model.FK__dogovor__klient___6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="YP_01_Praktic_1Model.FK__dogovor__program__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="YP_01_Praktic_1Model.FK__dogovor__status___66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="YP_01_Praktic_1Model.FK__platezh__dogovor__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="YP_01_Praktic_1Model.FK__dokument__klient__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="YP_01_Praktic_1Model.FK_users_klient" ManuallyRouted="false" />
+        <AssociationConnector Association="YP_01_Praktic_1Model.FK__programma__vid_s__628FA481" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,717 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище YP_01_Praktic_1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="agent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="familiya" Type="varchar" MaxLength="100" />
+          <Property Name="imya" Type="varchar" MaxLength="100" />
+          <Property Name="otchestvo" Type="varchar" MaxLength="100" />
+          <Property Name="telefon" Type="varchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="dogovor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="klient_id" Type="int" />
+          <Property Name="agent_id" Type="int" />
+          <Property Name="programma_id" Type="int" />
+          <Property Name="status_id" Type="int" />
+          <Property Name="nomer" Type="varchar" MaxLength="50" />
+          <Property Name="data_nachala" Type="date" />
+          <Property Name="data_okonchaniya" Type="date" />
+          <Property Name="strahovaya_summa" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="strahovaya_premiya" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="data_oformleniya" Type="datetime" />
+        </EntityType>
+        <EntityType Name="dokument">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="klient_id" Type="int" />
+          <Property Name="tip_dokumenta" Type="varchar" MaxLength="100" />
+          <Property Name="nomer" Type="varchar" MaxLength="100" />
+          <Property Name="data_vydachi" Type="date" />
+          <Property Name="kem_vydan" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="klient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="familiya" Type="varchar" MaxLength="100" />
+          <Property Name="imya" Type="varchar" MaxLength="100" />
+          <Property Name="otchestvo" Type="varchar" MaxLength="100" />
+          <Property Name="data_rozhdeniya" Type="date" />
+          <Property Name="telefon" Type="varchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="150" />
+          <Property Name="adres" Type="varchar" MaxLength="255" />
+          <Property Name="pasport" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="platezh">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dogovor_id" Type="int" />
+          <Property Name="data_platezha" Type="datetime" />
+          <Property Name="summa" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="sposob_oplaty" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="programma">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vid_strahovaniya_id" Type="int" />
+          <Property Name="nazvanie" Type="varchar" MaxLength="150" />
+          <Property Name="opisanie" Type="text" />
+          <Property Name="bazovaya_stavka" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="status_dogovora">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazvanie" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password_hash" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="klient_id" Type="int" />
+          <Property Name="agent_id" Type="int" />
+        </EntityType>
+        <EntityType Name="vid_strahovaniya">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazvanie" Type="varchar" MaxLength="150" />
+          <Property Name="opisanie" Type="text" />
+        </EntityType>
+        <Association Name="FK__dogovor__agent_i__6477ECF3">
+          <End Role="agent" Type="Self.agent" Multiplicity="0..1" />
+          <End Role="dogovor" Type="Self.dogovor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dogovor">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dogovor__klient___6383C8BA">
+          <End Role="klient" Type="Self.klient" Multiplicity="0..1" />
+          <End Role="dogovor" Type="Self.dogovor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dogovor">
+              <PropertyRef Name="klient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dogovor__program__656C112C">
+          <End Role="programma" Type="Self.programma" Multiplicity="0..1" />
+          <End Role="dogovor" Type="Self.dogovor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programma">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dogovor">
+              <PropertyRef Name="programma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dogovor__status___66603565">
+          <End Role="status_dogovora" Type="Self.status_dogovora" Multiplicity="0..1" />
+          <End Role="dogovor" Type="Self.dogovor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status_dogovora">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dogovor">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dokument__klient__68487DD7">
+          <End Role="klient" Type="Self.klient" Multiplicity="0..1" />
+          <End Role="dokument" Type="Self.dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dokument">
+              <PropertyRef Name="klient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__platezh__dogovor__6754599E">
+          <End Role="dogovor" Type="Self.dogovor" Multiplicity="0..1" />
+          <End Role="platezh" Type="Self.platezh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dogovor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="platezh">
+              <PropertyRef Name="dogovor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__programma__vid_s__628FA481">
+          <End Role="vid_strahovaniya" Type="Self.vid_strahovaniya" Multiplicity="0..1" />
+          <End Role="programma" Type="Self.programma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vid_strahovaniya">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="programma">
+              <PropertyRef Name="vid_strahovaniya_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_agent">
+          <End Role="agent" Type="Self.agent" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_klient">
+          <End Role="klient" Type="Self.klient" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="klient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище YP_01_Praktic_1ModelContainer">
+          <EntitySet Name="agent" EntityType="Self.agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dogovor" EntityType="Self.dogovor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dokument" EntityType="Self.dokument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="klient" EntityType="Self.klient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="platezh" EntityType="Self.platezh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="programma" EntityType="Self.programma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="status_dogovora" EntityType="Self.status_dogovora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vid_strahovaniya" EntityType="Self.vid_strahovaniya" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__dogovor__agent_i__6477ECF3" Association="Self.FK__dogovor__agent_i__6477ECF3">
+            <End Role="agent" EntitySet="agent" />
+            <End Role="dogovor" EntitySet="dogovor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dogovor__klient___6383C8BA" Association="Self.FK__dogovor__klient___6383C8BA">
+            <End Role="klient" EntitySet="klient" />
+            <End Role="dogovor" EntitySet="dogovor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dogovor__program__656C112C" Association="Self.FK__dogovor__program__656C112C">
+            <End Role="programma" EntitySet="programma" />
+            <End Role="dogovor" EntitySet="dogovor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dogovor__status___66603565" Association="Self.FK__dogovor__status___66603565">
+            <End Role="status_dogovora" EntitySet="status_dogovora" />
+            <End Role="dogovor" EntitySet="dogovor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dokument__klient__68487DD7" Association="Self.FK__dokument__klient__68487DD7">
+            <End Role="klient" EntitySet="klient" />
+            <End Role="dokument" EntitySet="dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK__platezh__dogovor__6754599E" Association="Self.FK__platezh__dogovor__6754599E">
+            <End Role="dogovor" EntitySet="dogovor" />
+            <End Role="platezh" EntitySet="platezh" />
+          </AssociationSet>
+          <AssociationSet Name="FK__programma__vid_s__628FA481" Association="Self.FK__programma__vid_s__628FA481">
+            <End Role="vid_strahovaniya" EntitySet="vid_strahovaniya" />
+            <End Role="programma" EntitySet="programma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_agent" Association="Self.FK_users_agent">
+            <End Role="agent" EntitySet="agent" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_klient" Association="Self.FK_users_klient">
+            <End Role="klient" EntitySet="klient" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YP_01_Praktic_1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="agent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="familiya" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="imya" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="otchestvo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="dogovor" Relationship="Self.FK__dogovor__agent_i__6477ECF3" FromRole="agent" ToRole="dogovor" />
+          <NavigationProperty Name="users" Relationship="Self.FK_users_agent" FromRole="agent" ToRole="users" />
+        </EntityType>
+        <EntityType Name="dogovor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="klient_id" Type="Int32" />
+          <Property Name="agent_id" Type="Int32" />
+          <Property Name="programma_id" Type="Int32" />
+          <Property Name="status_id" Type="Int32" />
+          <Property Name="nomer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="data_nachala" Type="DateTime" Precision="0" />
+          <Property Name="data_okonchaniya" Type="DateTime" Precision="0" />
+          <Property Name="strahovaya_summa" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="strahovaya_premiya" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="data_oformleniya" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="agent" Relationship="Self.FK__dogovor__agent_i__6477ECF3" FromRole="dogovor" ToRole="agent" />
+          <NavigationProperty Name="klient" Relationship="Self.FK__dogovor__klient___6383C8BA" FromRole="dogovor" ToRole="klient" />
+          <NavigationProperty Name="programma" Relationship="Self.FK__dogovor__program__656C112C" FromRole="dogovor" ToRole="programma" />
+          <NavigationProperty Name="status_dogovora" Relationship="Self.FK__dogovor__status___66603565" FromRole="dogovor" ToRole="status_dogovora" />
+          <NavigationProperty Name="platezh" Relationship="Self.FK__platezh__dogovor__6754599E" FromRole="dogovor" ToRole="platezh" />
+        </EntityType>
+        <EntityType Name="dokument">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="klient_id" Type="Int32" />
+          <Property Name="tip_dokumenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nomer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="data_vydachi" Type="DateTime" Precision="0" />
+          <Property Name="kem_vydan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="klient" Relationship="Self.FK__dokument__klient__68487DD7" FromRole="dokument" ToRole="klient" />
+        </EntityType>
+        <EntityType Name="klient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="familiya" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="imya" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="otchestvo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="data_rozhdeniya" Type="DateTime" Precision="0" />
+          <Property Name="telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="adres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="pasport" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="dogovor" Relationship="Self.FK__dogovor__klient___6383C8BA" FromRole="klient" ToRole="dogovor" />
+          <NavigationProperty Name="dokument" Relationship="Self.FK__dokument__klient__68487DD7" FromRole="klient" ToRole="dokument" />
+          <NavigationProperty Name="users" Relationship="Self.FK_users_klient" FromRole="klient" ToRole="users" />
+        </EntityType>
+        <EntityType Name="platezh">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dogovor_id" Type="Int32" />
+          <Property Name="data_platezha" Type="DateTime" Precision="3" />
+          <Property Name="summa" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="sposob_oplaty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="dogovor" Relationship="Self.FK__platezh__dogovor__6754599E" FromRole="platezh" ToRole="dogovor" />
+        </EntityType>
+        <EntityType Name="programma">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vid_strahovaniya_id" Type="Int32" />
+          <Property Name="nazvanie" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="opisanie" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="bazovaya_stavka" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="dogovor" Relationship="Self.FK__dogovor__program__656C112C" FromRole="programma" ToRole="dogovor" />
+          <NavigationProperty Name="vid_strahovaniya" Relationship="Self.FK__programma__vid_s__628FA481" FromRole="programma" ToRole="vid_strahovaniya" />
+        </EntityType>
+        <EntityType Name="status_dogovora">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="dogovor" Relationship="Self.FK__dogovor__status___66603565" FromRole="status_dogovora" ToRole="dogovor" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password_hash" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="klient_id" Type="Int32" />
+          <Property Name="agent_id" Type="Int32" />
+          <NavigationProperty Name="agent" Relationship="Self.FK_users_agent" FromRole="users" ToRole="agent" />
+          <NavigationProperty Name="klient" Relationship="Self.FK_users_klient" FromRole="users" ToRole="klient" />
+        </EntityType>
+        <EntityType Name="vid_strahovaniya">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazvanie" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="opisanie" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="programma" Relationship="Self.FK__programma__vid_s__628FA481" FromRole="vid_strahovaniya" ToRole="programma" />
+        </EntityType>
+        <Association Name="FK__dogovor__agent_i__6477ECF3">
+          <End Role="agent" Type="Self.agent" Multiplicity="0..1" />
+          <End Role="dogovor" Type="Self.dogovor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dogovor">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_agent">
+          <End Role="agent" Type="Self.agent" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dogovor__klient___6383C8BA">
+          <End Role="klient" Type="Self.klient" Multiplicity="0..1" />
+          <End Role="dogovor" Type="Self.dogovor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dogovor">
+              <PropertyRef Name="klient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dogovor__program__656C112C">
+          <End Role="programma" Type="Self.programma" Multiplicity="0..1" />
+          <End Role="dogovor" Type="Self.dogovor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programma">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dogovor">
+              <PropertyRef Name="programma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dogovor__status___66603565">
+          <End Role="status_dogovora" Type="Self.status_dogovora" Multiplicity="0..1" />
+          <End Role="dogovor" Type="Self.dogovor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status_dogovora">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dogovor">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__platezh__dogovor__6754599E">
+          <End Role="dogovor" Type="Self.dogovor" Multiplicity="0..1" />
+          <End Role="platezh" Type="Self.platezh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dogovor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="platezh">
+              <PropertyRef Name="dogovor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dokument__klient__68487DD7">
+          <End Role="klient" Type="Self.klient" Multiplicity="0..1" />
+          <End Role="dokument" Type="Self.dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dokument">
+              <PropertyRef Name="klient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_klient">
+          <End Role="klient" Type="Self.klient" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="klient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__programma__vid_s__628FA481">
+          <End Role="vid_strahovaniya" Type="Self.vid_strahovaniya" Multiplicity="0..1" />
+          <End Role="programma" Type="Self.programma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vid_strahovaniya">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="programma">
+              <PropertyRef Name="vid_strahovaniya_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YP_01_Praktic_1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="agent" EntityType="Self.agent" />
+          <EntitySet Name="dogovor" EntityType="Self.dogovor" />
+          <EntitySet Name="dokument" EntityType="Self.dokument" />
+          <EntitySet Name="klient" EntityType="Self.klient" />
+          <EntitySet Name="platezh" EntityType="Self.platezh" />
+          <EntitySet Name="programma" EntityType="Self.programma" />
+          <EntitySet Name="status_dogovora" EntityType="Self.status_dogovora" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="vid_strahovaniya" EntityType="Self.vid_strahovaniya" />
+          <AssociationSet Name="FK__dogovor__agent_i__6477ECF3" Association="Self.FK__dogovor__agent_i__6477ECF3">
+            <End Role="agent" EntitySet="agent" />
+            <End Role="dogovor" EntitySet="dogovor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_agent" Association="Self.FK_users_agent">
+            <End Role="agent" EntitySet="agent" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dogovor__klient___6383C8BA" Association="Self.FK__dogovor__klient___6383C8BA">
+            <End Role="klient" EntitySet="klient" />
+            <End Role="dogovor" EntitySet="dogovor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dogovor__program__656C112C" Association="Self.FK__dogovor__program__656C112C">
+            <End Role="programma" EntitySet="programma" />
+            <End Role="dogovor" EntitySet="dogovor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dogovor__status___66603565" Association="Self.FK__dogovor__status___66603565">
+            <End Role="status_dogovora" EntitySet="status_dogovora" />
+            <End Role="dogovor" EntitySet="dogovor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__platezh__dogovor__6754599E" Association="Self.FK__platezh__dogovor__6754599E">
+            <End Role="dogovor" EntitySet="dogovor" />
+            <End Role="platezh" EntitySet="platezh" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dokument__klient__68487DD7" Association="Self.FK__dokument__klient__68487DD7">
+            <End Role="klient" EntitySet="klient" />
+            <End Role="dokument" EntitySet="dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_klient" Association="Self.FK_users_klient">
+            <End Role="klient" EntitySet="klient" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__programma__vid_s__628FA481" Association="Self.FK__programma__vid_s__628FA481">
+            <End Role="vid_strahovaniya" EntitySet="vid_strahovaniya" />
+            <End Role="programma" EntitySet="programma" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище YP_01_Praktic_1ModelContainer" CdmEntityContainer="YP_01_Praktic_1Entities">
+          <EntitySetMapping Name="agent">
+            <EntityTypeMapping TypeName="YP_01_Praktic_1Model.agent">
+              <MappingFragment StoreEntitySet="agent">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="familiya" ColumnName="familiya" />
+                <ScalarProperty Name="imya" ColumnName="imya" />
+                <ScalarProperty Name="otchestvo" ColumnName="otchestvo" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dogovor">
+            <EntityTypeMapping TypeName="YP_01_Praktic_1Model.dogovor">
+              <MappingFragment StoreEntitySet="dogovor">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="klient_id" ColumnName="klient_id" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="programma_id" ColumnName="programma_id" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="nomer" ColumnName="nomer" />
+                <ScalarProperty Name="data_nachala" ColumnName="data_nachala" />
+                <ScalarProperty Name="data_okonchaniya" ColumnName="data_okonchaniya" />
+                <ScalarProperty Name="strahovaya_summa" ColumnName="strahovaya_summa" />
+                <ScalarProperty Name="strahovaya_premiya" ColumnName="strahovaya_premiya" />
+                <ScalarProperty Name="data_oformleniya" ColumnName="data_oformleniya" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dokument">
+            <EntityTypeMapping TypeName="YP_01_Praktic_1Model.dokument">
+              <MappingFragment StoreEntitySet="dokument">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="klient_id" ColumnName="klient_id" />
+                <ScalarProperty Name="tip_dokumenta" ColumnName="tip_dokumenta" />
+                <ScalarProperty Name="nomer" ColumnName="nomer" />
+                <ScalarProperty Name="data_vydachi" ColumnName="data_vydachi" />
+                <ScalarProperty Name="kem_vydan" ColumnName="kem_vydan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klient">
+            <EntityTypeMapping TypeName="YP_01_Praktic_1Model.klient">
+              <MappingFragment StoreEntitySet="klient">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="familiya" ColumnName="familiya" />
+                <ScalarProperty Name="imya" ColumnName="imya" />
+                <ScalarProperty Name="otchestvo" ColumnName="otchestvo" />
+                <ScalarProperty Name="data_rozhdeniya" ColumnName="data_rozhdeniya" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+                <ScalarProperty Name="pasport" ColumnName="pasport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="platezh">
+            <EntityTypeMapping TypeName="YP_01_Praktic_1Model.platezh">
+              <MappingFragment StoreEntitySet="platezh">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dogovor_id" ColumnName="dogovor_id" />
+                <ScalarProperty Name="data_platezha" ColumnName="data_platezha" />
+                <ScalarProperty Name="summa" ColumnName="summa" />
+                <ScalarProperty Name="sposob_oplaty" ColumnName="sposob_oplaty" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="programma">
+            <EntityTypeMapping TypeName="YP_01_Praktic_1Model.programma">
+              <MappingFragment StoreEntitySet="programma">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="vid_strahovaniya_id" ColumnName="vid_strahovaniya_id" />
+                <ScalarProperty Name="nazvanie" ColumnName="nazvanie" />
+                <ScalarProperty Name="opisanie" ColumnName="opisanie" />
+                <ScalarProperty Name="bazovaya_stavka" ColumnName="bazovaya_stavka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status_dogovora">
+            <EntityTypeMapping TypeName="YP_01_Praktic_1Model.status_dogovora">
+              <MappingFragment StoreEntitySet="status_dogovora">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nazvanie" ColumnName="nazvanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="YP_01_Praktic_1Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="YP_01_Praktic_1Model.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password_hash" ColumnName="password_hash" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="klient_id" ColumnName="klient_id" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vid_strahovaniya">
+            <EntityTypeMapping TypeName="YP_01_Praktic_1Model.vid_strahovaniya">
+              <MappingFragment StoreEntitySet="vid_strahovaniya">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nazvanie" ColumnName="nazvanie" />
+                <ScalarProperty Name="opisanie" ColumnName="opisanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

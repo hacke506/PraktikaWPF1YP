@@ -1,0 +1,53 @@
+﻿<Page x:Class="PraktikaWPF1YP.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PraktikaWPF1YP"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AuthPage">
+
+   <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Border Background="White" CornerRadius="8" Padding="30" Width="360" 
+                BorderBrush="#CCCCCC" BorderThickness="1" SnapsToDevicePixels="True">
+            <StackPanel>
+                <TextBlock Text="Авторизация" FontSize="22" FontWeight="Bold" 
+                           HorizontalAlignment="Center" Margin="0,0,0,20" Foreground="#333333"/>
+
+                
+                <TextBlock Text="Логин:" Margin="0,5,0,2"/>
+                <TextBox x:Name="TxtLogin" Height="35" VerticalContentAlignment="Center" Padding="5,0"/>
+
+                
+                <TextBlock Text="Пароль:" Margin="0,10,0,2"/>
+                <PasswordBox x:Name="TxtPassword" Height="35" VerticalContentAlignment="Center" Padding="5,0"/>
+
+                
+                <StackPanel Margin="0,15,0,0">
+                    <TextBlock Text="Введите код с картинки:" Foreground="#555555" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="TxtCaptchaCanvas" Grid.Column="0" Background="#F0F0F0" 
+                                   Text="A8FB" FontSize="18" FontWeight="Black" FontStyle="Italic"
+                                   HorizontalAlignment="Stretch" TextAlignment="Center" Padding="5" 
+                                   TextDecorations="Strikethrough" VerticalAlignment="Center"/>
+                        <Button Content="🔄" Grid.Column="1" Width="35" Height="35" Margin="5,0,0,0" Click="BtnRefreshCaptcha_Click"/>
+                    </Grid>
+                    <TextBox x:Name="TxtCaptchaInput" Height="35" Margin="0,5,0,0" VerticalContentAlignment="Center"/>
+                </StackPanel>
+
+                
+                <Button x:Name="BtnLogin" Content="Войти" Height="40" Margin="0,20,0,0" 
+                        Background="#007ACC" Foreground="White" FontWeight="Bold" Click="BtnLogin_Click"/>
+
+                <Button Content="У меня нет аккаунта (Регистрация)" 
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
+                        Margin="0,15,0,0" Foreground="#007ACC" Click="BtnGoToRegister_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
