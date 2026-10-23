@@ -1,0 +1,43 @@
+﻿<Window x:Class="PraktikaWPF1YP.AddAgentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PraktikaWPF1YP"
+        mc:Ignorable="d"
+        Title="AddAgentWindow" Height="450" Width="800">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,3">
+            <TextBlock Text="Фамилия рекрутера HR:" FontWeight="SemiBold"/>
+            <TextBox x:Name="TxtFam" Height="28" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="0,3">
+            <TextBlock Text="Имя рекрутера HR:" FontWeight="SemiBold"/>
+            <TextBox x:Name="TxtName" Height="28" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="0,3">
+            <TextBlock Text="Отчество рекрутера:" FontWeight="SemiBold"/>
+            <TextBox x:Name="TxtOtch" Height="28" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Margin="0,3">
+            <TextBlock Text="Контактный рабочий телефон:" FontWeight="SemiBold"/>
+            <TextBox x:Name="TxtPhone" Height="28" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Content="Добавить" Click="BtnSave_Click" Width="90" Height="30" Background="#2ECC71" Foreground="White" FontWeight="Bold" Margin="0,0,10,0"/>
+            <Button Content="Отмена" Click="BtnCancel_Click" Width="90" Height="30" Background="#95A5A6" Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</Window>

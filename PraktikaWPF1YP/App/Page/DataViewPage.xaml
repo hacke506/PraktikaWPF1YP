@@ -1,0 +1,109 @@
+﻿<Page x:Class="PraktikaWPF1YP.DataViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PraktikaWPF1YP"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DataViewPage">
+    <Grid x:Name="MainGrid" Background="White" Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Фильтры -->
+            <RowDefinition Height="*"/>
+            <!-- Таблицы -->
+            <RowDefinition Height="Auto"/>
+            <!-- Управление -->
+        </Grid.RowDefinitions>
+
+        <!-- Панель поиска и переключения тем -->
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <TextBlock x:Name="LblSearch" Text="Поиск по коду / фамилии: " VerticalAlignment="Center" FontWeight="SemiBold"/>
+                <TextBox x:Name="TxtSearch" Width="150" Height="30" VerticalContentAlignment="Center" ToolTip="Введите текст для поиска" TextChanged="FilterChanged"/>
+
+                <ComboBox x:Name="ComboSort" Width="180" Height="30" Margin="15,0,0,0" SelectionChanged="FilterChanged" SelectedIndex="0">
+                    <ComboBoxItem Content="Без сортировки"/>
+                    <ComboBoxItem Content="По возрастанию бюджета"/>
+                    <ComboBoxItem Content="По убыванию бюджета"/>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Кнопка смены темы -->
+            <Button Grid.Column="1" x:Name="BtnToggleTheme" Content="🌓 Сменить тему" Click="BtnToggleTheme_Click" Width="130" Height="30" Background="#34495E" Foreground="White" FontWeight="Bold"/>
+        </Grid>
+
+        <!-- Вкладки рекрутинга -->
+        <TabControl Grid.Row="1" x:Name="TablesTabControl" SelectionChanged="TablesTabControl_SelectionChanged">
+            <!-- 1. Вакансии -->
+            <TabItem Header="💼 Вакансии (Vacancies)">
+                <DataGrid x:Name="GridDogovors" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Код вакансии" Binding="{Binding id}" Width="90"/>
+                        <DataGridTextColumn Header="Шифр должности" Binding="{Binding nomer}" Width="130"/>
+                        <DataGridTextColumn Header="Дата публикации" Binding="{Binding data_nachala, StringFormat=dd.MM.yyyy}" Width="120"/>
+                        <DataGridTextColumn Header="Дедлайн закрытия" Binding="{Binding data_okonchaniya, StringFormat=dd.MM.yyyy}" Width="120"/>
+                        <DataGridTextColumn Header="Предлагаемый оклад" Binding="{Binding strahovaya_summa, StringFormat={}{0:F2}}" Width="140"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!-- 2. Кандидаты -->
+            <TabItem Header="👥 Кандидаты (Candidates)">
+                <DataGrid x:Name="GridKlients" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding id}" Width="40"/>
+                        <DataGridTextColumn Header="Фамилия" Binding="{Binding familiya}" Width="120"/>
+                        <DataGridTextColumn Header="Имя" Binding="{Binding imya}" Width="110"/>
+                        <DataGridTextColumn Header="Отчество" Binding="{Binding otchestvo}" Width="120"/>
+                        <DataGridTextColumn Header="Телефон" Binding="{Binding telefon}" Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!-- 3. Рекрутеры -->
+            <TabItem Header="👔 Рекрутеры (HR Agents)">
+                <DataGrid x:Name="GridAgents" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding id}" Width="50"/>
+                        <DataGridTextColumn Header="Фамилия HR" Binding="{Binding familiya}" Width="130"/>
+                        <DataGridTextColumn Header="Имя HR" Binding="{Binding imya}" Width="120"/>
+                        <DataGridTextColumn Header="Отчество" Binding="{Binding otchestvo}" Width="130"/>
+                        <DataGridTextColumn Header="Контактный телефон" Binding="{Binding telefon}" Width="140"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!-- 4. Офферы и Этапы -->
+            <TabItem Header="💳 Офферы и Этапы (Offers)">
+                <DataGrid x:Name="GridPayments" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID Записи" Binding="{Binding id}" Width="70"/>
+                        <DataGridTextColumn Header="Дата назначения" Binding="{Binding data_platezha, StringFormat=dd.MM.yyyy}" Width="130"/>
+                        <DataGridTextColumn Header="Текущий оклад" Binding="{Binding summa, StringFormat={}{0:F2}}" Width="120"/>
+                        <DataGridTextColumn Header="Тип этапа" Binding="{Binding status}" Width="140"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+
+        <!-- Выровненная панель действий администратора -->
+        <StackPanel x:Name="PanelAdminActions" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0" Visibility="Collapsed">
+            <Button Content="➕ Добавить" Click="BtnAdd_Click" Width="110" Height="35" Background="#2ECC71" Foreground="White" FontWeight="Bold" Margin="0,0,5,0"/>
+            <Button Content="❌ Удалить" Click="BtnDelete_Click" Width="110" Height="35" Background="#E74C3C" Foreground="White" FontWeight="Bold" Margin="0,0,15,0"/>
+
+            <!-- Новая кнопка Диаграммы -->
+            <Button Content="📊 Диаграмма" Click="BtnShowChart_Click" Width="120" Height="35" Background="#9B59B6" Foreground="White" FontWeight="Bold" Margin="0,0,15,0"/>
+
+            <Button Content="📊 Excel" Click="ExportToExcel_Click" Width="80" Height="35" Background="#1F7246" Foreground="White" Margin="0,0,5,0"/>
+            <Button Content="📝 Word" Click="ExportToWord_Click" Width="80" Height="35" Background="#2B579A" Foreground="White" Margin="0,0,5,0"/>
+            <Button Content="📕 PDF" Click="ExportToPdf_Click" Width="80" Height="35" Background="#F44336" Foreground="White" Margin="0,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Page>

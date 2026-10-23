@@ -104,21 +104,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="App\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="App\Window\AddOfferWindow.xaml.cs">
+      <DependentUpon>AddOfferWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Window\AddAgentWindow.xaml.cs">
+      <DependentUpon>AddAgentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Window\AddCandidateWindow.xaml.cs">
+      <DependentUpon>AddCandidateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Window\AddVacancyWindow.xaml.cs">
+      <DependentUpon>AddVacancyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="agent.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="AuthPage.xaml.cs">
+    <Compile Include="App\Window\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChangePasswordPage.xaml.cs">
+    <Compile Include="App\Page\ChangePasswordPage.xaml.cs">
       <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataViewPage.xaml.cs">
+    <Compile Include="App\Page\DataViewPage.xaml.cs">
       <DependentUpon>DataViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App\Window\ChartWindow.xaml.cs">
+      <DependentUpon>ChartWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="dogovor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -155,27 +170,47 @@
     <Compile Include="vid_strahovaniya.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Page Include="AuthPage.xaml">
+    <Page Include="App\Window\AddOfferWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ChangePasswordPage.xaml">
+    <Page Include="App\Window\AddAgentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataViewPage.xaml">
+    <Page Include="App\Window\AddCandidateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="App\Window\AddVacancyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Window\AuthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Page\ChangePasswordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Page\DataViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Window\ChartWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="App\Window\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="App\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="App\Window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -226,7 +261,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App\App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model1.Context.tt">
@@ -243,5 +278,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,57 @@
+﻿<Window x:Class="PraktikaWPF1YP.AddCandidateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PraktikaWPF1YP"
+        mc:Ignorable="d"
+        Title="AddCandidateWindow" Height="450" Width="800">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,3">
+            <TextBlock Text="Фамилия соискателя:" FontWeight="SemiBold"/>
+            <TextBox x:Name="TxtFam" Height="28" VerticalContentAlignment="Center" Padding="5,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="0,3">
+            <TextBlock Text="Имя соискателя:" FontWeight="SemiBold"/>
+            <TextBox x:Name="TxtName" Height="28" VerticalContentAlignment="Center" Padding="5,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="0,3">
+            <TextBlock Text="Отчество соискателя:" FontWeight="SemiBold"/>
+            <TextBox x:Name="TxtOtch" Height="28" VerticalContentAlignment="Center" Padding="5,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Margin="0,3">
+            <TextBlock Text="Контактный телефон:" FontWeight="SemiBold"/>
+            <TextBox x:Name="TxtPhone" Height="28" VerticalContentAlignment="Center" Padding="5,0"/>
+        </StackPanel>
+
+        <!-- Новое поле: Email -->
+        <StackPanel Grid.Row="4" Margin="0,3">
+            <TextBlock Text="Электронная почта (Email):" FontWeight="SemiBold"/>
+            <TextBox x:Name="TxtEmail" Height="28" VerticalContentAlignment="Center" Padding="5,0"/>
+        </StackPanel>
+
+        <!-- Новое поле: Место проживания -->
+        <StackPanel Grid.Row="5" Margin="0,3">
+            <TextBlock Text="Место проживания (Адрес):" FontWeight="SemiBold"/>
+            <TextBox x:Name="TxtAddress" Height="28" VerticalContentAlignment="Center" Padding="5,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,15,0,0">
+            <Button Content="Добавить" Click="BtnSave_Click" Width="100" Height="32" Background="#2ECC71" Foreground="White" FontWeight="Bold" Margin="0,0,10,0"/>
+            <Button Content="Отмена" Click="BtnCancel_Click" Width="100" Height="32" Background="#95A5A6" Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</Window>
